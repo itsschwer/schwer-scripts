@@ -24,7 +24,7 @@ An implementation of items and inventories using Scriptable Objects.
 * As inventories use Scriptable Objects, in order for them to persist between scenes, ensure that there is a reference to the inventory in each scene you want it to persist to.
 ## Getting started
 Download this repository and add the `SchwerScripts` folder to your Unity project.
-Familiarise yourself with the system by dragging the prefab `Inventory` (`SchwerScripts/ItemSystem/Demo/UI/Inventory`) into a new Scene and following along with this section. 
+Familiarise yourself with the system by dragging the prefab `Inventory` (`SchwerScripts/ItemSystem/Demo/UI/Prefabs/Inventory`) into a new Scene and following along with this section. 
 #### Items
 Create Item assets in a folder of your choice via `Create/Scriptable Object/Item System/Item`.
 Edit them via the Inspector, or the Item Editor.
