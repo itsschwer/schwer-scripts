@@ -80,7 +80,7 @@ How these are used depends on you. If you do extend `Item`, then you will also n
 ### Inventory
 The inventory Scriptable Object can be thought of as a container for an `Inventory` object. The `Inventory` uses a `Dictionary<Item, int>` which holds the items contained in the inventory and the associated amount of that item.
 ##### Code examples:
-```
+```csharp
 [SerializeField] private InventorySO inventory = default;
 // ...
 // To check if the inventory has <count> of <item>:
@@ -99,7 +99,7 @@ The inventory Scriptable Object can be thought of as a container for an `Invento
 #### Saving and Loading
 Saving and loading has successfully been done using a binary formatter approach. Ensure that the object you serialize uses `SerializedInventory` and not `Inventory`.
 ##### Example code:
-```
+```csharp
 using Schwer.ItemSystem;
 
 [System.Serializable]
@@ -122,7 +122,7 @@ public class SaveData {
     }
 }
 ```
-```
+```csharp
 private SaveData ReadSaveDataFile(string filePath) {
     SaveData result = null;
     BinaryFormatter formatter = new BinaryFormatter();
