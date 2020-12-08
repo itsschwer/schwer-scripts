@@ -1,7 +1,9 @@
 # schwer-scripts
 Open-source code for Unity.
 ## About
-Hi, I'm Schwer, hobbyist game developer. As I am self-taught, I can't say for sure that the code I write is the cleanest. Despite that, rest assured that this repository contains only what I consider usable. Feel free to use this as a reference or a base for your own project(s). I'd love to improve, so if you have any suggestions to make, please do so.
+This repository contains skeleton implementations of various features. Feel free to use this as a reference or a base for your own project(s).
+
+I'm just a hobbyist, so if you have any improvements or suggestions, let me know!
 ## Contents
 * Item System (using Scriptable Objects)
 * TBA
