@@ -5,38 +5,44 @@ This repository contains skeleton implementations of various features. Feel free
 
 I'm just a hobbyist, so if you have any improvements or suggestions, let me know!
 ## Contents
-* Item System (using Scriptable Objects)
+* Serializable Item System (using Scriptable Objects)
 * TBA
 
-# Item System
+# Serializable Item System
 An skeleton implementation of items and inventories using Scriptable Objects.
 ## Features
 * Items and inventories in Unity using Scriptable Objects
-* Inventories that support saving and loading
-* An Item Database that is generated and regenerated with the click of a button
+* Inventories that support saving and loading (i.e. serializable)
+* An Item Database that is simple to generate and regenerate
 * An Item Editor (custom editor window)
 ## Limitations
-* Inventories use a Dictionary which Unity does not serialize to the Inspector by default, meaning that inventories cannot be easily be inspected via the Editor.
-* Inventory assets do not maintain their value between Edit mode and Play mode, meaning that they can only be used at runtime and cannot easily have a starting value.
+* Inventories are implemented using a `Dictionary`, which Unity does not serialize. This means that:
+    * Inventory assets cannot be edited via the Inspector
+    * Inventory assets will lose their values on domain reload (e.g. entering Play mode)
 ## Notes
-* This implementation only provides the bare-bones of an item system.
-* It is expected that you will extend the Item class in order for items to be usable in a game (e.g. consumables).
-* The contents of the provided Demo folder is only intended for you to familiarise yourself with the system.
-* You should implement your own system for displaying inventory to the UI, items that can be placed in the world, etc.
-* As inventories use Scriptable Objects, in order for them to persist between scenes, ensure that there is a reference to the inventory in each scene you want it to persist to.
+* This implementation only provides the bare bones of an item system.
+* It is expected that developers will extend the `Item` class in order for items to be usable in a game (e.g. consumables).
+* The contents of the provided Demo folder is intended only for developers to familiarise themselves with the system.
+    * Developers should implement their own system for displaying inventory to the UI, items that can be placed in the world, etc.
+* As inventory assets are Scriptable Objects, there must be a reference to each inventory asset at all times during runtime in order for their values to persist, or Unity will unload them the next time it unloads unused resources.
 ## Getting started
 Download this repository and add the `SchwerScripts` folder to your Unity project.
-Familiarise yourself with the system by dragging the prefab `Inventory` (`SchwerScripts/ItemSystem/Demo/UI/Prefabs/Inventory`) into a new Scene and following along with this section. 
+Familiarise yourself with the system by dragging the prefab `Inventory` (`SchwerScripts/ItemSystem/Demo/UI/Prefabs/Inventory`) into a new Scene and following along with this section.
+
+You may need to create an Event System (`Right-click in the Hierarchy > UI/Event System`) in order to interact with the demo UI. Also note that the UI was designed for a 16:9 game window.
+
 #### Items
 Create Item assets in a folder of your choice via `Create/Scriptable Object/Item System/Item`.
 Edit them via the Inspector, or the Item Editor.
+
 #### Item Editor
 Can be opened in three ways:
 * From the toolbar via `Item System/Open Item Editor`
 * From the Inspector of an Item asset
 * From double-clicking an Item asset
 
-Dock this window appropriately for the best appearance.
+This window is not necessary, but it does provide a helpful overview of the Item assets in your project.
+
 #### Item Database
 This system relies on an Item Database for the saving and loading of inventories. A Item Database can be created:
 * From the toolbar via `Item System/Generate ItemDatabase`
@@ -45,13 +51,13 @@ This system relies on an Item Database for the saving and loading of inventories
 This will create an Item Database in the currently selected folder if none exist.
 Otherwise, it will update (regenerate) an existing Item Database.
 To regenerate an Item Database after editing items, use either of the above methods for creating an Item Database or via the Inspector of the Item Database asset.
+
 #### Inventory
 Create an Inventory asset in a folder of your choice via `Create/Scriptable Objects/Item System/Inventory`.
 Assign this asset to the `InventoryManager` script attached to the instance of the `Inventory` prefab in the Scene.
-#### Play Mode
-Enter Play mode and assign the `InventoryManager` to the appropriate field in the Inspector for the Inventory asset (you will need to do this every time you enter Play mode — again, this is only intended for familiarisation).
 
-Experiment with the controls (Clear Inventory, Check, Set, Add, Remove, Clear) in the Inspector for the Inventory asset (make sure to assign an Item!).
+#### Play Mode
+Enter Play mode and select your Inventory asset to experiment with the demo controls (make sure to assign an `Item` to the custom Inspector!).
 
 ## Usage guide
 Non-editor scripts are in the namespace `Schwer.ItemSystem`, so remember to add that as a `using` when working with the Item System.
@@ -61,13 +67,18 @@ Generate or regenerate by:
 * Button in the Item Editor
 * Inspector of an exisiting ItemDatabase asset
 
-This process will first check for all ItemDatabase assets in your project. If none exist, a new one will be created in the selected folder/folder of selected item with the name `ItemDatabase`. If one already exists it will be regenerated. If multiple exist, an error will be logged to the Console. Make sure that your game object(s) refer to a single ItemDatabase and delete the extra assets before trying again.
+#### Generation process
+This process will first check for all ItemDatabase assets in your project. If none exist, a new one will be created in the selected folder/folder of selected item with the name `ItemDatabase`. If one already exists it will be regenerated. If multiple exist, an error will be logged to the Console. Make sure that your game object(s) reference a single ItemDatabase and delete the extra assets before trying again.
 
 Stores items in a list by item id in ascending order. The generation process is done alphabetically (by filename). Any items with an id matching that of an item that has already been added will be omitted from the ItemDatabase and a warning will be logged to the Console.
 
-The ItemDatabase should only be referenced in the scene where saved inventories are loaded, as that is its only intended purpose.
+The ItemDatabase should only be referenced in the scene where inventories are deserialized, as that is its only intended purpose.
 
-Rather than trying to serialize each Item in an inventory, an inventory is first serialized into a form that stores the item id instead of the item itself (which will not work as the item is a nested Scriptable Object). Loading a `SerializedInventory` requires an ItemDatabase which is used to match ids in the `SerializedInventory` with the corresponding Item in the ItemDatabase. Because of this, ***item ids should not change once a build has been released***, since that will cause ids to be matched to the wrong Item.
+#### Why use an Item Database?
+Rather than trying to serialize each `Item` in an `Inventory`, an `Inventory` is first serialized into a form (`SerializableInventory`) that stores the item id instead of the item itself. This is done because serializing nested Scriptable Objects is prone to error.
+
+Loading a `SerializableInventory` requires an `ItemDatabase` which is used to match ids in the `SerializableInventory` with the corresponding `Item` in the `ItemDatabase`. Because of this, ***item ids should not change once a build has been released***, since that will cause ids to be matched to the wrong `Item`.
+
 ### Item Editor
 Accessible via:
 * Menu item `Item System/Open Item Editor`
@@ -75,31 +86,48 @@ Accessible via:
 * Double-clicking on an Item asset
 
 Serves as an additional way to edit existing Item assets. Items are ordered in the sidebar by their id for convenience.
-### Item
-This implementation provides a bare-bones script intended to be a base from which you will extend. It contains fields for: id, name, description, sprite, and stackable.
 
-How these are used depends on you. If you do extend `Item`, then you will also need to edit `ItemEditor.cs` in order for your properties to be displayed in the Item Editor. You may choose to use the Inspector for editing the extended properties of classes derived from `Item` and use the Item Editor for the base properties if you wish not to manage an editor window.
+### Item
+This implementation provides a bare-bones script intended to be a base from which developers will extend. It contains fields for: `id`, `name`, `description`, `sprite`, and `stackable`.
+
+How these are used is left up to the developer. If you modify `Item.cs`, then you will also need to edit `ItemEditor.cs` in order for it to display the correct properties. You may choose to use the Inspector for editing the extended properties of classes derived from `Item` and use the Item Editor for the base properties if you wish not to manage an editor window.
+
 ### Inventory
-The inventory Scriptable Object can be thought of as a container for an `Inventory` object. The `Inventory` uses a `Dictionary<Item, int>` which holds the items contained in the inventory and the associated amount of that item.
+The inventory Scriptable Object can be thought of as a container for an `Inventory`. An `Inventory` can be used in a manner similar to a  `Dictionary<Item, int>`, where `int` represents the number of an `Item` held in the `Inventory`.
 ##### Code examples:
 ```csharp
-[SerializeField] private InventorySO inventory = default;
-// ...
-// To check if the inventory has <count> of <item>:
-    bool result = inventory.value.CheckItem(Item item, int count);
+[SerializeField] private InventorySO _inventory = default;
+public Inventory inventory => _inventory.value;
+
+// e.g. Picking up an item.
+public void ObtainItem(Item item, int amount) {
+    inventory[item] += amount;
+}
+
+// Use up <amount> of <item>, e.g. for crafting.
+public bool UseItem(Item item, int amount) {
+    if (inventory[item] >= amount) {
+        inventory[item] -= amount;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// e.g. Resetting a shop's inventory of an item.
+public void SetItem(Item item, int amount) {
+    inventory[item] = amount;
+}
     
-// To set the <count> of <item> in the inventory:
-    inventory.value.SetItem(Item item, int count);
-    
-// To remove an <item> from the inventory:
-    inventory.value.RemoveItem(Item item);
-    
-// To change the count of an <item> in the inventory by <amount>:
-    inventory.value.ChangeItemCount(Item item, int amount);
-    // Works with positive and negative values.
+// e.g. Removing illegal items.
+public void RemoveItem(Item item) {
+    inventory.Remove(item);
+}
 ```
+
 #### Saving and Loading
-Saving and loading has successfully been done using a binary formatter approach. Ensure that the object you serialize uses `SerializedInventory` and not `Inventory`.
+Saving and loading has successfully been done using `BinaryFormatter`s. Ensure that the object you serialize uses `SerializableInventory` and not `Inventory`.
 ##### Example code:
 ```csharp
 using Schwer.ItemSystem;
@@ -113,36 +141,37 @@ public class SaveData {
         inventory = new SerializableInventory();
     }
 
-    // Construct save data from SOs (parameters).
-    public SaveData(InventorySO inventory) {
-        this.inventory = inventory.value.Serialize();
+    // Construct save data from an Inventory.
+    public SaveData(Inventory inventory) {
+        this.inventory = inventory.Serialize();
     }
 
-    // Load save data into SOs (parameters).
-    public void Load(InventorySO inventory, ItemDatabase itemDB) {
-        inventory.value = this.inventory.Deserialize(itemDB);
+    // Load save data 
+    public void Load(out Inventory inventory, ItemDatabase itemDB) {
+        inventory = this.inventory.Deserialize(itemDB);
     }
 }
 ```
 ```csharp
-private SaveData ReadSaveDataFile(string filePath) {
-    SaveData result = null;
-    BinaryFormatter formatter = new BinaryFormatter();
-    using (FileStream stream = new FileStream(filePath, FileMode.Open)) {
-        try {
-            result = formatter.Deserialize(stream) as SaveData;
+public static class SaveReadWriter {
+    public static SaveData ReadSaveDataFile(string filePath) {
+        BinaryFormatter formatter = new BinaryFormatter();
+        using (FileStream stream = new FileStream(filePath, FileMode.Open)) {
+            try {
+                return formatter.Deserialize(stream) as SaveData;
+            }
+            catch (System.Runtime.Serialization.SerializationException e) {
+                Debug.Log("File at: " + filePath + " is incompatible. " + e);
+            }
         }
-        catch (System.Runtime.Serialization.SerializationException) {
-            Debug.Log("File at: " + filePath + " is incompatible.");
-        }
+        return null;
     }
-    return result;
-}
 
-public void WriteSaveDataFile(SaveData saveData, string filePath) {
-    BinaryFormatter formatter = new BinaryFormatter();
-    using (FileStream stream = new FileStream(filePath, FileMode.Create)) {
-        formatter.Serialize(stream, saveData);
+    public static void WriteSaveDataFile(SaveData saveData, string filePath) {
+        BinaryFormatter formatter = new BinaryFormatter();
+        using (FileStream stream = new FileStream(filePath, FileMode.Create)) {
+            formatter.Serialize(stream, saveData);
+        }
     }
 }
 ```
