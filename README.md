@@ -1,5 +1,10 @@
 # schwer-scripts
+[![Showcase](https://img.shields.io/badge/Demo-Showcase-blue.svg)](https://github.com/itsschwer/Showcase) [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://www.paypal.com/donate?hosted_button_id=NYFKAS24D4MJS)
+
 Open-source code for Unity.
+
+A demonstration of how this repository could be used, including a playable demo, is available in the [Showcase](https://github.com/itsschwer/Showcase) repository.
+
 ## About
 This repository contains skeleton implementations of various features. Feel free to use this as a reference or a base for your own project(s).
 
