@@ -11,6 +11,10 @@ This repository contains skeleton implementations of various features. Feel free
 I'm just a hobbyist, so if you have any improvements or suggestions, let me know!
 ## Contents
 * Serializable Item System (using Scriptable Objects)
+* [Editor scripts](https://github.com/itsschwer/schwer-scripts/tree/master/SchwerScripts/Editor)
+    * `PrefabMenu` (menu items to speed up prefab workflow)
+    * `ScriptableObjectUtility` (work with Scriptable Object assets via code)
+    * TBA
 * TBA
 
 # Serializable Item System
