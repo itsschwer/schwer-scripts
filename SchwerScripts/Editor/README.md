@@ -6,8 +6,8 @@ A collection of various editor scripts.
 These should always be placed in a folder named `Editor`, as that is a [special folder name](https://docs.unity3d.com/Manual/SpecialFolders.html) that Unity uses to determine which scripts should be stripped from builds.
 
 ## Contents
-* [`PrefabMenu`](#PrefabMenu)
-* [`ScriptableObjectUtility`](#ScriptableObjectUtility)
+* [`PrefabMenu`](#PrefabMenu) (menu items to speed up prefab workflow)
+* [`ScriptableObjectUtility`](#ScriptableObjectUtility) (work with Scriptable Object assets via code)
 * [`EditorWindowUtility`](#EditorWindowUtility) [not yet documented]
 
 # `PrefabMenu`
