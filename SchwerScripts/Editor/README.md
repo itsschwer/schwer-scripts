@@ -12,7 +12,7 @@ These should always be placed in a folder named `Editor`, as that is a [special 
 
 # `PrefabMenu`
 Editor script to improve prefab workflow by adding `Instantiate Prefab` as a menu item to the `GameObject` / right-click in Hierarchy menu. Requires light modification for each prefab.
-## Guide
+## Guide <img align="right" width="223" height="402" alt="screenshot of prefab menu in editor" src="https://github.com/itsschwer/schwer-scripts/blob/master/screen-captures/prefab_menu.png?raw=true"></img>
 1. Add a `public static` function (with `MenuCommand` as a parameter) that calls `InstantiatePrefab`, passing in the `MenuCommand` and the path to the asset.
 2. Add the attribute `[MenuItem("GameObject/Instantiate Prefab/<prefabName (arbitrary)>, false, 0)]` above the function.
 #### Example
@@ -20,7 +20,8 @@ Editor script to improve prefab workflow by adding `Instantiate Prefab` as a men
 [MenuItem("GameObject/Instantiate Prefab/Player", false, 0)]
 public static void InstantiatePlayerPrefab(MenuCommand command) {
     InstantiatePrefab(command, "Assets/Prefabs/Player.prefab");
-    // ^ You could also use a class-level string to store the path and pass that as an argument instead.
+    // ^ You could also use a class-level string to store the path
+    //   and pass that as an argument instead.
 }
 ```
 
