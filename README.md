@@ -97,9 +97,7 @@ Accessible via:
 Serves as an additional way to edit existing Item assets. Items are ordered in the sidebar by their id for convenience.
 
 ### Item
-This implementation provides a bare-bones script intended to be a base from which developers will extend. It contains fields for: `id`, `name`, `description`, `sprite`, and `stackable`.
-
-How these are used is left up to the developer. If you modify `Item.cs`, then you will also need to edit `ItemEditor.cs` in order for it to display the correct properties. You may choose to use the Inspector for editing the extended properties of classes derived from `Item` and use the Item Editor for the base properties if you wish not to manage an editor window.
+This implementation provides a bare-bones script intended to be a base from which developers will extend. It contains fields for: `id`, `name`, `description`, `sprite`, and `stackable`. How these are used is left up to the developer.
 
 ### Inventory
 The inventory Scriptable Object can be thought of as a container for an `Inventory`. An `Inventory` can be used in a manner similar to a  `Dictionary<Item, int>`, where `int` represents the number of an `Item` held in the `Inventory`.
