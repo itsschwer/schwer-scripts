@@ -5,11 +5,7 @@ using System.Runtime.Serialization;
 
 namespace Schwer.ItemSystem {
     [Serializable]  // Only to allow Unity to display Inventories in the Inspector
-    public class Inventory : IDictionary<Item, int>
-#if UNITY_EDITOR
-    , UnityEngine.ISerializationCallbackReceiver
-#endif
-    {
+    public class Inventory : IDictionary<Item, int>, UnityEngine.ISerializationCallbackReceiver {
         /// <summary>
         /// Invoked when the number of an item is changed through the `Inventory[]` property,
         /// `Remove()` is successful, or when `Add()` or `Clear()` is called. Passes in the `Item` and the its new amount.
@@ -118,17 +114,16 @@ namespace Schwer.ItemSystem {
         #endregion
         #endregion
         
-#if UNITY_EDITOR
-        #region Editor-only serialisation for read-only display
-
+        #region ISerializationCallbackReciever
         [UnityEngine.SerializeField] private List<Item> keys;
         [UnityEngine.SerializeField] private List<int> values;
 
         //! Called every frame when Inventory is inspected, as this is how Unity displays objects in the Inspector.
         public void OnBeforeSerialize() => DictionaryToLists();
-        public void OnAfterDeserialize() {} // No writing to dictionary
-        // public void OnAfterDeserialize() => ListsToDictionary();
-        // // UnityException: ToString is not allowed to be called during serialization, call it from OnEnable instead. Called from ScriptableObject 'InventorySO'.
+        // public void OnAfterDeserialize() {} // No writing to dictionary
+        public void OnAfterDeserialize() => ListsToDictionary();
+        //! UnityException: ToString is not allowed to be called during serialization, call it from OnEnable instead. Called from ScriptableObject 'InventorySO'.
+        //! Not entirely sure what causes the above, may have been due to missing `this.Clear` in `ListsToDictionary`?
 
         private void DictionaryToLists() {
             keys = new List<Item>();
@@ -141,13 +136,17 @@ namespace Schwer.ItemSystem {
         }
 
         private void ListsToDictionary() {
-            for (int i = 0; i < Math.Min(keys.Count, values.Count); i++) {
+            this.Clear();
+
+            if(keys.Count != values.Count) {
+                throw new Exception($"Deserialization failed: The number of keys ({keys.Count}) and values ({values.Count}) are not equal.");
+            }
+
+            for (int i = 0; i < keys.Count; i++) {
                 this.Add(keys[i], values[i]);
             }
         }
-
         #endregion
-#endif
     }
 
     [Serializable]
