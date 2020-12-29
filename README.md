@@ -26,8 +26,10 @@ An skeleton implementation of items and inventories using Scriptable Objects.
 * An Item Editor (custom editor window)
 ## Limitations
 * Inventories are implemented using a `Dictionary`, which Unity does not serialize. This means that:
-    * Inventory assets cannot be edited via the Inspector
-    * Inventory assets will lose their values on domain reload (e.g. entering Play mode)
+    * Inventory assets cannot be edited via the Inspector.
+        * *A solution is being worked on. For now, the example `InventoryInspector` provides a crude workaround.*
+    * ~~Inventory assets will lose their values on domain reload (e.g. entering Play mode)~~.
+        * ***Inventory now implements `ISerializationCallbackReciever` to address this. This is a recent change, so please alert me if there are any issues pertaining to this.***
 ## Notes
 * This implementation only provides the bare bones of an item system.
 * It is expected that developers will extend the `Item` class in order for items to be usable in a game (e.g. consumables).
