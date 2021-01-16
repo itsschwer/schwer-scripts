@@ -2,6 +2,9 @@
 using UnityEngine;
 
 namespace SchwerEditor {
+    /// <summary>
+    /// Editor class containing wrapper functions for working with assets.
+    /// </summary>
     public static class AssetsUtility {
         /// <summary>
         /// Wrapper for `AssetDatabase.SaveAssets`, `AssetDatabase.Refresh`, and `EditorUtility.FocusProjectWindow`.
