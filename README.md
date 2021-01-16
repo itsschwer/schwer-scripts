@@ -13,9 +13,10 @@ I'm just a hobbyist, so if you have any improvements or suggestions, let me know
 * Serializable Item System (using Scriptable Objects)
 * [Editor scripts](https://github.com/itsschwer/schwer-scripts/tree/master/SchwerScripts/Editor)
     * `PrefabMenu` (menu items to speed up prefab workflow)
+    * `AssetsUtility` (work with assets via code)
     * `ScriptableObjectUtility` (work with Scriptable Object assets via code)
     * TBA
-* TBA
+* TBA (WebGL save/loading!)
 
 # Serializable Item System
 An skeleton implementation of items and inventories using Scriptable Objects.

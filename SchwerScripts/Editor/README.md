@@ -7,6 +7,7 @@ These should always be placed in a folder named `Editor`, as that is a [special 
 
 ## Contents
 * [`PrefabMenu`](#PrefabMenu) (menu items to speed up prefab workflow)
+* [`AssetsUtility`](#AssetsUtility) (work with assets via code)
 * [`ScriptableObjectUtility`](#ScriptableObjectUtility) (work with Scriptable Object assets via code)
 * [`EditorWindowUtility`](#EditorWindowUtility) [not yet documented]
 
@@ -24,6 +25,9 @@ public static void InstantiatePlayerPrefab(MenuCommand command) {
     //   and pass that as an argument instead.
 }
 ```
+
+# `AssetsUtility`
+Editor script containing wrapper functions for working with assets.
 
 # `ScriptableObjectUtility`
 Editor script intended for working with Scriptable Object assets through code.
