@@ -37,7 +37,7 @@ Returns an array of all assets of a specified type in the project.
 private static List<Item> GetAllItemAssets() {
     var result = new List<Item>();
 
-    var instances = AssetsUtility.FindAllInstances<Item>();
+    var instances = AssetsUtility.FindAllAssets<Item>();
     // ^ Get all instances of type Item for sorting!
     var gatheredIDs = new List<int>();
     for (int i = 0; i < instances.Length; i++) {
@@ -70,7 +70,7 @@ Creates a Scriptable Object of type `T` in a process similar to `[CreateAssetMen
 #### Example usage (from [ItemDatabaseUtility.cs](https://github.com/itsschwer/schwer-scripts/blob/master/SchwerScripts/ItemSystem/Editor/ItemDatabaseUtility.cs)):
 ```csharp
 private static ItemDatabase GetItemDatabase() {
-    var databases = AssetsUtility.FindAllInstances<ItemDatabase>();
+    var databases = AssetsUtility.FindAllAssets<ItemDatabase>();
 
     ItemDatabase itemDB = null;
     if (databases.Length < 1) {
