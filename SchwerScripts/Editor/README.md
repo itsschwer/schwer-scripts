@@ -55,6 +55,12 @@ private static List<Item> GetAllItemAssets() {
     return result;
 }
 ```
+### `FindFirstAsset<T>`
+Returns the first asset found of a specified type in the project.
+
+The function will automatically append ` typeof(T)` if the `filter` argument does not contain the `t:` keyword.
+
+Refer to the official Unity documentation on [`AssetDatabase.FindAssets`](https://docs.unity3d.com/ScriptReference/AssetDatabase.FindAssets.html) for more information on the `filter` argument.
 
 # `ScriptableObjectUtility`
 Editor script intended for working with Scriptable Object assets through code.
