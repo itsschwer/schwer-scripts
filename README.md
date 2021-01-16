@@ -16,6 +16,8 @@ I'm just a hobbyist, so if you have any improvements or suggestions, let me know
     * `AssetsUtility` (work with assets via code)
     * `ScriptableObjectUtility` (work with Scriptable Object assets via code)
     * TBA
+* [Common scripts](https://github.com/itsschwer/schwer-scripts/tree/master/SchwerScripts/Common)
+    * `MonoBehaviourSingleton` & `DDOLSingleton`
 * TBA (WebGL save/loading!)
 
 # Serializable Item System
