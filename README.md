@@ -33,6 +33,9 @@ An skeleton implementation of items and inventories using Scriptable Objects.
         * *A solution is being worked on. For now, the example `InventoryInspector` provides a crude workaround.*
     * ~~Inventory assets will lose their values on domain reload (e.g. entering Play mode)~~.
         * ***Inventory now implements `ISerializationCallbackReciever` to address this. This is a recent change, so please alert me if there are any issues pertaining to this.***
+* By default, inventories do not support fixed inventory sizes, item weighting systems, or the like (though developers may try to implement such functionalities).
+    * For reference, as may be evident from the demo prefab, this system was modelled after the one in *Breath of the Wild*.
+        * *(Different inventory sections could be handled with front-end sorting code, e.g. through use of an `ItemType` enum).*
 ## Notes
 * This implementation only provides the bare bones of an item system.
 * It is expected that developers will extend the `Item` class in order for items to be usable in a game (e.g. consumables).
@@ -67,7 +70,7 @@ Otherwise, it will update (regenerate) an existing Item Database.
 To regenerate an Item Database after editing items, use either of the above methods for creating an Item Database or via the Inspector of the Item Database asset.
 
 #### Inventory
-Create an Inventory asset in a folder of your choice via `Create/Scriptable Objects/Item System/Inventory`.
+Create an Inventory asset in a folder of your choice via `Create/Scriptable Object/Item System/Inventory`.
 Assign this asset to the `InventoryManager` script attached to the instance of the `Inventory` prefab in the Scene.
 
 #### Play Mode
@@ -89,7 +92,11 @@ Stores items in a list by item id in ascending order. The generation process is 
 The ItemDatabase should only be referenced in the scene where inventories are deserialized, as that is its only intended purpose.
 
 #### Why use an Item Database?
-Rather than trying to serialize each `Item` in an `Inventory`, an `Inventory` is first serialized into a form (`SerializableInventory`) that stores the item id instead of the item itself. This is done because serializing nested Scriptable Objects is prone to error.
+Rather than trying to serialize each `Item` in an `Inventory`, an `Inventory` is first serialized into a form (`SerializableInventory`) that stores the item id instead of the item itself. This is done for several reasons:
+* It is unlikely that the entire `Item` object needs to be written to a save file — it's already in the game!
+    * `Item`s themselves may not be serializable at all, depending on the fields they contain.
+    * Prevents "cheating in" non-existent items by modifying save data.
+* Serializing nested Scriptable Objects is prone to error.
 
 Loading a `SerializableInventory` requires an `ItemDatabase` which is used to match ids in the `SerializableInventory` with the corresponding `Item` in the `ItemDatabase`. Because of this, ***item ids should not change once a build has been released***, since that will cause ids to be matched to the wrong `Item`.
 
