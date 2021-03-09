@@ -21,7 +21,7 @@ I'm just a hobbyist, so if you have any improvements or suggestions, let me know
 * TBA (WebGL save/loading!)
 
 # Serializable Item System
-An skeleton implementation of items and inventories using Scriptable Objects.
+An skeleton implementation of items and inventories using Scriptable Objects, as well as several supporting editor scripts.
 ## Features
 * Items and inventories in Unity using Scriptable Objects
 * Inventories that support saving and loading (i.e. serializable)
@@ -29,10 +29,10 @@ An skeleton implementation of items and inventories using Scriptable Objects.
 * An Item Editor (custom editor window)
 ## Limitations
 * Inventories are implemented using a `Dictionary`, which Unity does not serialize. This means that:
-    * Inventory assets cannot be edited via the Inspector.
+    * `Inventory` assets cannot be edited via the Inspector.
         * *A solution is being worked on. For now, the example `InventoryInspector` provides a crude workaround.*
     * ~~Inventory assets will lose their values on domain reload (e.g. entering Play mode)~~.
-        * ***Inventory now implements `ISerializationCallbackReciever` to address this. This is a recent change, so please alert me if there are any issues pertaining to this.***
+        * ***`Inventory` now implements `ISerializationCallbackReciever` to address this. This is a recent change, so please alert me if there are any issues pertaining to this.***
 * By default, inventories do not support fixed inventory sizes, item weighting systems, or the like (though developers may try to implement such functionalities).
     * For reference, as may be evident from the demo prefab, this system was modelled after the one in *Breath of the Wild*.
         * *(Different inventory sections could be handled with front-end sorting code, e.g. through use of an `ItemType` enum).*
@@ -41,7 +41,7 @@ An skeleton implementation of items and inventories using Scriptable Objects.
 * It is expected that developers will extend the `Item` class in order for items to be usable in a game (e.g. consumables).
 * The contents of the provided Demo folder is intended only for developers to familiarise themselves with the system.
     * Developers should implement their own system for displaying inventory to the UI, items that can be placed in the world, etc.
-* As inventory assets are Scriptable Objects, there must be a reference to each inventory asset at all times during runtime in order for their values to persist, or Unity will unload them the next time it unloads unused resources.
+* As `Inventory` assets are Scriptable Objects, there must be a reference to each `Inventory` asset at all times during runtime in order for their values to persist, or Unity will unload them the next time it unloads unused resources.
 ## Getting started
 Download this repository and add the `SchwerScripts` folder to your Unity project.
 Familiarise yourself with the system by dragging the prefab `Inventory` (`SchwerScripts/ItemSystem/Demo/UI/Prefabs/Inventory`) into a new Scene and following along with this section.
@@ -67,7 +67,7 @@ This system relies on an `ItemDatabase` for the saving and loading of inventorie
 * From the Item Editor (button at the bottom labelled `Generate Item Database`)
 
 This will create an `ItemDatabase` in the currently selected folder if none exist.
-Otherwise, it will update (regenerate) an existing Item Database.
+Otherwise, it will update (regenerate) an existing `ItemDatabase`.
 To regenerate an `ItemDatabase` after editing items, use either of the above methods for creating an `ItemDatabase` or via the Inspector of the `ItemDatabase` asset.
 
 ### Inventory
@@ -75,7 +75,7 @@ Create an `Inventory` asset in a folder of your choice via `Create/Item System/I
 Assign this asset to the `InventoryManager` script attached to the instance of the `Inventory` prefab in the Scene.
 
 ### Play Mode
-Enter Play mode and select your Inventory asset to experiment with the demo controls (make sure to assign an `Item` to the custom Inspector!).
+Enter Play mode and select your `Inventory` asset to experiment with the demo controls (make sure to assign an `Item` to the custom Inspector!).
 
 ## Usage guide
 Non-editor scripts are in the namespace `Schwer.ItemSystem`, so remember to add that as a `using` when working with the Item System.
@@ -92,7 +92,7 @@ This process will first check for all `ItemDatabase` assets in your project. If 
 Stores `Item`s in a List, ordered by id in ascending order. The generation process is done alphabetically (by filename). Any `Item`s with an id matching that of an `Item` that has already been added will be omitted from the `ItemDatabase` and a warning will be logged to the Console.
 
 #### Usage
-The `ItemDatabase` should only be referenced in the scene where inventories are deserialized, as that is its only intended purpose (otherwise all items referenced by the `ItemDatabase` will be loaded and kept in memory, which is likely unnecessary).
+The `ItemDatabase` should only be referenced in the scene where inventories are deserialized, as that is its only intended purpose (otherwise all `Item`s referenced by the `ItemDatabase` will be loaded and kept in memory, which is likely unnecessary).
 
 #### Why use an Item Database?
 Rather than trying to serialize each `Item` in an `Inventory`, an `Inventory` is first serialized into a form (`SerializableInventory`) that stores the `Item`'s id instead of the `Item` itself. This is done for several reasons:
