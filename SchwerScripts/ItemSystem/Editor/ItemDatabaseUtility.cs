@@ -32,7 +32,7 @@ namespace SchwerEditor.ItemSystem {
     }
 
     public static class ItemDatabaseUtility {
-        [MenuItem("Item System/Generate ItemDatabase"), MenuItem("Assets/Create/Item System/ItemDatabase", false, -11)]
+        [MenuItem("Item System/Generate Item Database", false, -2), MenuItem("Assets/Create/Item System/Item Database", false, -11)]
         public static void GenerateItemDatabase() {
             var itemDB = GetItemDatabase();
             if (itemDB == null) { return; }
