@@ -21,7 +21,7 @@ namespace SchwerEditor {
         /// </summary>
         public static T[] FindAllAssets<T>() where T : Object {
             // From: https://answers.unity.com/questions/1425758/how-can-i-find-all-instances-of-a-scriptable-objec.html
-            var guids = AssetDatabase.FindAssets("t:" + typeof(T).FullName);
+            var guids = AssetDatabase.FindAssets($"t:{typeof(T)}");
 
             var instances = new T[guids.Length];
             for (int i = 0; i < guids.Length; i++) {
