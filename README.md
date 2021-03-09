@@ -149,7 +149,7 @@ public void RemoveItem(Item item) {
 ```
 
 ## Saving and Loading
-Saving and loading has successfully been done using `BinaryFormatter`s. Ensure that the object you serialize uses `SerializableInventory` and not `Inventory`.
+Saving and loading has successfully been done using a `BinaryFormatter` approach. Ensure that the object you serialize uses `SerializableInventory` and not `Inventory`.
 ##### Example code:
 ```csharp
 using Schwer.ItemSystem;
