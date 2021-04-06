@@ -3,7 +3,7 @@
 
 Open-source code for Unity.
 
-A demonstration of how this repository could be used, including a playable demo, is available in the [Showcase](https://github.com/itsschwer/Showcase) repository.
+A demonstration of how this repository could be used, including a playable demo, is available from the [Showcase](https://github.com/itsschwer/Showcase) repository.
 
 ## About
 This repository contains skeleton implementations of various features. Feel free to use this as a reference or a base for your own project(s).
@@ -11,12 +11,12 @@ This repository contains skeleton implementations of various features. Feel free
 I'm just a hobbyist, so if you have any improvements or suggestions, let me know!
 ## Contents
 * Serializable Item System (using Scriptable Objects)
-* [Editor scripts](https://github.com/itsschwer/schwer-scripts/tree/master/SchwerScripts/Editor)
+* [Editor scripts](/SchwerScripts/Editor)
     * `PrefabMenu` (menu items to speed up prefab workflow)
     * `AssetsUtility` (work with assets via code)
     * `ScriptableObjectUtility` (work with Scriptable Object assets via code)
     * TBA
-* [Common scripts](https://github.com/itsschwer/schwer-scripts/tree/master/SchwerScripts/Common)
+* [Common scripts](/SchwerScripts/Common)
     * `MonoBehaviourSingleton` & `DDOLSingleton`
 * TBA (WebGL save/loading!)
 
