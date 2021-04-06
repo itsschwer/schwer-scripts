@@ -1,5 +1,5 @@
 # schwer-scripts
-[![Showcase](https://img.shields.io/badge/Demo-Showcase-blue.svg)](https://github.com/itsschwer/Showcase) [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://www.paypal.com/donate?hosted_button_id=NYFKAS24D4MJS)
+[![Showcase](https://img.shields.io/badge/Demo-Showcase-0366D6.svg)](https://github.com/itsschwer/Showcase) [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://www.paypal.com/donate?hosted_button_id=NYFKAS24D4MJS)
 
 Open-source code for Unity.
 
