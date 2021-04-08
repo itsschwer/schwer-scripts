@@ -17,6 +17,7 @@ I'm just a hobbyist, so if you have any improvements or suggestions, let me know
     * `ScriptableObjectUtility` (work with Scriptable Object assets via code)
     * TBA
 * [Common scripts](/SchwerScripts/Common)
+    * `BinaryIO` (wrapper for reading and writing binary files)
     * `MonoBehaviourSingleton` & `DDOLSingleton`
 * TBA (WebGL save/loading!)
 
