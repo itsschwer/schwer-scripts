@@ -4,7 +4,27 @@
 A collection of scripts that are likely to be used in any project.
 
 ## Contents
+* [`BinaryIO`](#BinaryIO) (wrapper for reading and writing binary files)
 * [Singletons (`MonoBehaviourSingleton` & `DDOLSingleton`)](#Singletons)
+
+# `BinaryIO`
+Wrapper class containing generic functions for reading and writing binary files.
+
+Does not contain any error checking.
+
+#### Example usage:
+```csharp
+public class SaveManager : MonoBehaviourSingleton<SaveManager> {
+    private static string filePath => Application.persistentDataPath + "/save.dat";
+
+    // `SaveData` would be a class marked with the `System.Serializable` attribute.
+    public SaveData saveData;
+
+    public void Save() => BinaryIO.WriteFile<SaveData>(saveData, filePath);
+
+    public void Load() => saveData = BinaryIO.ReadFile<SaveData>(filePath);
+}
+```
 
 # Singletons
 Singletons are a useful (but often abused) method of ensuring only one instance of a class exists at any time. Avoid using these where possible.
