@@ -150,7 +150,7 @@ public void RemoveItem(Item item) {
 ```
 
 ## Saving and Loading
-Saving and loading has successfully been done using a `BinaryFormatter` approach. Ensure that the object you serialize uses `SerializableInventory` and not `Inventory`.
+Saving and loading has successfully been done using a `BinaryFormatter` approach *(refer to [`BinaryIO`](/SchwerScripts/Common/NonMono/BinaryIO.cs))*. Ensure that the object you serialize uses `SerializableInventory` and not `Inventory`.
 ##### Example code:
 ```csharp
 using Schwer.ItemSystem;
@@ -172,31 +172,6 @@ public class SaveData {
     // Load save data 
     public void Load(out Inventory inventory, ItemDatabase itemDB) {
         inventory = this.inventory.Deserialize(itemDB);
-    }
-}
-```
-```csharp
-public static class SaveReadWriter {
-    // Returns save data from the file at the specified location (if possible).
-    public static SaveData ReadSaveDataFile(string filePath) {
-        BinaryFormatter formatter = new BinaryFormatter();
-        using (FileStream stream = new FileStream(filePath, FileMode.Open)) {
-            try {
-                return formatter.Deserialize(stream) as SaveData;
-            }
-            catch (System.Runtime.Serialization.SerializationException e) {
-                Debug.Log("File at: " + filePath + " is incompatible. " + e);
-            }
-        }
-        return null;
-    }
-
-    // Writes the save data to a file at the specified location.
-    public static void WriteSaveDataFile(SaveData saveData, string filePath) {
-        BinaryFormatter formatter = new BinaryFormatter();
-        using (FileStream stream = new FileStream(filePath, FileMode.Create)) {
-            formatter.Serialize(stream, saveData);
-        }
     }
 }
 ```
