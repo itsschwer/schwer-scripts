@@ -18,8 +18,7 @@ namespace SchwerEditor.ItemSystem {
             }
 
             var foldoutRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
-            var name = (BelongsToInventorySO(property)) ? "Contents" : property.displayName;
-            property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, $"{name} ({keys.arraySize})", true);
+            property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, $"{GetDisplayName(property)} ({keys.arraySize})", true);
 
             if (property.isExpanded) {
                 EditorGUI.BeginDisabledGroup(true);
@@ -43,9 +42,12 @@ namespace SchwerEditor.ItemSystem {
             }
         }
 
-        private bool BelongsToInventorySO(SerializedProperty property) {
+        private string GetDisplayName(SerializedProperty property) {
+            // Personal practice when using ScriptableObjects that act as an
+            // SO container for a plain C# type is to name the member `value`.
+            // However, I want `InventorySO.value` to display as 'Contents'.
             var objectType = property.serializedObject.targetObject.GetType();
-            return objectType == typeof(InventorySO);
+            return (objectType == typeof(InventorySO)) ? "Contents" : property.displayName;
         }
     }
 }
