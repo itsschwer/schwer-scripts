@@ -18,7 +18,8 @@ namespace SchwerEditor.ItemSystem {
             }
 
             var foldoutRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
-            property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, "Contents (" + keys.arraySize + ")", true);
+            var name = (BelongsToInventorySO(property)) ? "Contents" : property.displayName;
+            property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, $"{name} ({keys.arraySize})", true);
 
             if (property.isExpanded) {
                 EditorGUI.BeginDisabledGroup(true);
@@ -40,6 +41,11 @@ namespace SchwerEditor.ItemSystem {
 
                 EditorGUI.EndDisabledGroup();
             }
+        }
+
+        private bool BelongsToInventorySO(SerializedProperty property) {
+            var objectType = property.serializedObject.targetObject.GetType();
+            return objectType == typeof(InventorySO);
         }
     }
 }
