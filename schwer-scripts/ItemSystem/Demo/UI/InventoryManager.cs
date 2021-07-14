@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +12,11 @@ namespace Schwer.ItemSystem.Demo {
         [Header("Item Display components")]
         [SerializeField] private Text nameDisplay = default;
         [SerializeField] private Text descriptionDisplay = default;
+
+        [Header("Overflow message")]
+        [SerializeField] private Text overflowLog = default;
+        [SerializeField] private float fadeDuration = 0.5f;
+        private Coroutine runningCoroutine;
 
         private List<ItemSlot> itemSlots = new List<ItemSlot>();
 
@@ -36,6 +42,7 @@ namespace Schwer.ItemSystem.Demo {
         }
 
         private void Initialise() {
+            overflowLog.canvasRenderer.SetAlpha(0);
             UpdateDisplay(null);
             if (inventory != null) {
                 UpdateSlots();
@@ -57,6 +64,13 @@ namespace Schwer.ItemSystem.Demo {
             var current = EventSystem.current.currentSelectedGameObject?.GetComponent<ItemSlot>();
             if (current != null) {
                 UpdateDisplay(current.item);
+            }
+
+            if (items.Count > itemSlots.Count) {
+                overflowLog.canvasRenderer.SetAlpha(1);
+            }
+            else if (overflowLog.canvasRenderer.GetAlpha() > 0) {
+                HideOverflowMessage();
             }
         }
 
@@ -86,6 +100,22 @@ namespace Schwer.ItemSystem.Demo {
                 nameDisplay.text = "";
                 descriptionDisplay.text = "";
             }
+        }
+
+        private void HideOverflowMessage() {
+            if (runningCoroutine != null) {
+                StopCoroutine(runningCoroutine);
+                runningCoroutine = null;
+            }
+            runningCoroutine = StartCoroutine(FadeTextCo());
+        }
+
+        private IEnumerator FadeTextCo() {
+            for (float t = 0; t < fadeDuration; t += Time.unscaledDeltaTime) {
+                overflowLog.canvasRenderer.SetAlpha(1 - (t / fadeDuration));
+                yield return null;
+            }
+            runningCoroutine = null;
         }
     }
 }
