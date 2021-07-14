@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -45,10 +44,10 @@ namespace Schwer.ItemSystem.Demo {
 
         public void UpdateSlots() => UpdateSlots(null, 0);
         private void UpdateSlots(Item item, int count) {
+            var items = GetInventoryList();
             for (int i = 0; i < itemSlots.Count; i++) {
-                if (i < inventory.Count) {
-                    var entry = inventory.ElementAt(i);
-                    itemSlots[i].SetItem(entry.Key, entry.Value);
+                if (i < items.Count) {
+                    itemSlots[i].SetItem(items[i].Item1, items[i].Item2);
                 }
                 else {
                     itemSlots[i].Clear();
@@ -59,6 +58,23 @@ namespace Schwer.ItemSystem.Demo {
             if (current != null) {
                 UpdateDisplay(current.item);
             }
+        }
+
+        private List<(Item, int)> GetInventoryList() {
+            var list = new List<(Item, int)>();
+
+            foreach (var entry in inventory) {
+                if (entry.Key.stackable) {
+                    list.Add((entry.Key, entry.Value));
+                }
+                else {
+                    for (int i = 0; i < entry.Value; i++) {
+                        list.Add((entry.Key, 1));
+                    }
+                }
+            }
+
+            return list;
         }
 
         public void UpdateDisplay(Item item) {
