@@ -4,13 +4,13 @@ using UnityEngine;
 namespace SchwerEditor.Database {
     using Schwer.Database;
 
-    public static class ScriptableDatabaseUtility<TDatabase, TElement>
-        where TDatabase : ScriptableDatabase<TElement>
-        where TElement : ScriptableObject {
-
+    public static class ScriptableDatabaseUtility {
         // [MenuItem("Generate ScriptableDatabase", false, -2), MenuItem("Assets/Create/ScriptableDatabase", false, -11)]
-        public static void GenerateDatabase() {
-            var db = GetDatabase();
+        public static void GenerateDatabase<TDatabase, TElement>() 
+            where TDatabase : ScriptableDatabase<TElement>
+            where TElement : ScriptableObject {
+
+            var db = GetDatabase<TDatabase, TElement>();
             if (db == null) return;
 
             db.Initialise(AssetsUtility.FindAllAssets<TElement>());
@@ -20,7 +20,10 @@ namespace SchwerEditor.Database {
             Selection.activeObject = db;
         }
 
-        private static TDatabase GetDatabase() {
+        private static TDatabase GetDatabase<TDatabase, TElement>() 
+            where TDatabase : ScriptableDatabase<TElement>
+            where TElement : ScriptableObject {
+
             var databases = AssetsUtility.FindAllAssets<TDatabase>();
 
             if (databases.Length < 1) {

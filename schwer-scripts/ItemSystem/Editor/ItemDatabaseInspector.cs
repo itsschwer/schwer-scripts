@@ -7,6 +7,6 @@ namespace SchwerEditor.ItemSystem {
     [CustomEditor(typeof(ItemDatabase))]
     public class ItemDatabaseInspector : ScriptableDatabaseInspector<ItemDatabase, Item> {
         [MenuItem("Item System/Generate ItemDatabase", false, -2), MenuItem("Assets/Create/Item System/ItemDatabase", false, -11)]
-        public static void GenerateDatabase() => ScriptableDatabaseUtility<ItemDatabase, Item>.GenerateDatabase();
+        public static void GenerateDatabase() => ScriptableDatabaseUtility.GenerateDatabase<ItemDatabase, Item>();
     }
 }

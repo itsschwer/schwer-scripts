@@ -11,7 +11,7 @@ namespace SchwerEditor.Database {
 
         public override void OnInspectorGUI() {
             if (GUILayout.Button($"Regenerate {typeof(TDatabase).Name}")) {
-                ScriptableDatabaseUtility<TDatabase, TElement>.GenerateDatabase();
+                ScriptableDatabaseUtility.GenerateDatabase<TDatabase, TElement>();
             }
             GUILayout.Space(5);
 
