@@ -19,6 +19,7 @@ I'm just a hobbyist, so if you have any improvements or suggestions, let me know
 * [Common scripts](/schwer-scripts/Common)
     * `BinaryIO` (wrapper for reading and writing binary files)
     * `MonoBehaviourSingleton` & `DDOLSingleton`
+- [Scriptable Database](/schwer-scripts/ScriptableDatabase)
 * TBA (WebGL save/loading!)
 
 <br/>
