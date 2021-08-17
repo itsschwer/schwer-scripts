@@ -20,7 +20,7 @@ namespace SchwerEditor.Database {
             arrayProperty.NextVisible(true);
             // `arrayProperty`: `Script` to array – relies on the first serializable property being an array (or list)
             arrayProperty.NextVisible(true);
-            if (arrayProperty.isArray) {
+            if (arrayProperty.isArray && arrayProperty.propertyType != SerializedPropertyType.String) {
                 var size = arrayProperty.arraySize;
                 var name = arrayProperty.displayName;
                 GUILayout.Label($"{name} ({size})");
@@ -34,7 +34,7 @@ namespace SchwerEditor.Database {
                 }
             }
             else {
-                EditorGUILayout.HelpBox($"Expected first serializable property in `{typeof(TDatabase).Name}` to be an array", MessageType.Error);
+                EditorGUILayout.HelpBox($"Expected first serializable property in `{typeof(TDatabase).Name}` to be an array.", MessageType.Error);
             }
         }
     }
