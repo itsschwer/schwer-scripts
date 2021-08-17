@@ -29,13 +29,13 @@ namespace Schwer.Database {
             I result = null;
             foreach (var element in elements) {
                 if (element == null) {
-                    Debug.LogWarning($"{this.GetType().Name} contains a null entry. Please regenerate the database to remove.");
+                    Debug.LogWarning($"{this.name} contains a null entry. Please regenerate the database to remove.");
                 }
                 else if (element.id == id) {
                     result = element;
                 }
             }
-            if (result == null) Debug.LogWarning($"{typeof(I).Name} with ID '{id}' was not found in the {this.GetType().Name}.");
+            if (result == null) Debug.LogWarning($"{typeof(I).Name} with ID '{id}' was not found in {this.name}.");
             return result;
         }
     }
