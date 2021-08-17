@@ -35,8 +35,7 @@ By design, there should only exist up to one instance of a Scriptable Database o
     - For example:
         ```cs
         [CustomEditor(typeof(ItemDatabase))]
-        public class ItemDatabaseInspector : ScriptableDatabaseInspector<ItemDatabase, Item> {
-        }
+        public class ItemDatabaseInspector : ScriptableDatabaseInspector<ItemDatabase, Item> {}
         ```
 5. Add a static method that calls `ScriptableDatabaseUtility.GenerateDatabase`
     - The type parameters should match that of your database and database element
@@ -79,7 +78,7 @@ An editor-only class for generating Scriptable Databases.
 Generates or regenerates a ScriptableDatabase asset.
 
 Intended to be used in editor scripts and/or Unity's `MenuItem` attribute.
-##### Example (from [ItemDatabaseInspector.cs](/schwer-scripts/ItemSystem/Editor/ItemDatabaseInspector.cs)):
+##### Example *(from [ItemDatabaseInspector.cs](/schwer-scripts/ItemSystem/Editor/ItemDatabaseInspector.cs))*:
 ```cs
 public class ItemDatabaseInspector : ScriptableDatabaseInspector<ItemDatabase, Item> {
     [MenuItem("Item System/Generate ItemDatabase", false, -2), MenuItem("Assets/Create/Item System/ItemDatabase", false, -11)]
