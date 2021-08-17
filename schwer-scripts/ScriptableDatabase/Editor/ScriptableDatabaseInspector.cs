@@ -5,6 +5,9 @@ namespace SchwerEditor.Database {
     using Schwer.Database;
 
     // [CustomEditor(typeof(TDatabase))]
+    /// <summary>
+    /// A custom inspector for displaying the properties of a <c cref="ScriptableDatabase">ScriptableDatabase</c> safely (prevents reassigning elements via the Inspector).
+    /// </summary>
     public class ScriptableDatabaseInspector<TDatabase, TElement> : Editor
         where TDatabase : ScriptableDatabase<TElement>
         where TElement : ScriptableObject {
