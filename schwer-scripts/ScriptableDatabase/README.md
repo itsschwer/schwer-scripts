@@ -78,7 +78,7 @@ An editor-only class for generating Scriptable Databases.
 Generates or regenerates a ScriptableDatabase asset.
 
 Intended to be used in editor scripts and/or Unity's `MenuItem` attribute.
-##### Example *(from [ItemDatabaseInspector.cs](/schwer-scripts/ItemSystem/Editor/ItemDatabaseInspector.cs))*:
+##### Example *(from [ItemDatabaseInspector.cs](/schwer-scripts/ItemSystem/Editor/ItemDatabaseInspector.cs))*
 ```cs
 public class ItemDatabaseInspector : ScriptableDatabaseInspector<ItemDatabase, Item> {
     [MenuItem("Item System/Generate ItemDatabase", false, -2), MenuItem("Assets/Create/Item System/ItemDatabase", false, -11)]
