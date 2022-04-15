@@ -31,7 +31,7 @@ namespace Schwer.WebGL {
         }
 
         public static void Import(string extension, GameObject receiverObject, Action<string> receiverMethod) {
-            Import(extension, receiverObject.name, receiverMethod.ToString());
+            Import(extension, receiverObject.name, receiverMethod.Method.Name);
         }
     }
 }

@@ -15,6 +15,10 @@ mergeInto(LibraryManager.library, {
         input.type = 'file';
         input.accept = Pointer_stringify(extension);
 
+        // https://stackoverflow.com/questions/44891748/pointer-stringify-is-returning-garbled-text
+        const object = Pointer_stringify(receiverObject);
+        const method = Pointer_stringify(receiverMethod);
+
         input.oninput = function (e) {
             const files = e.target.files;
 
@@ -28,7 +32,7 @@ mergeInto(LibraryManager.library, {
             fileReader.onload = function () {
                 // Reference: https://stackoverflow.com/questions/17845032/net-mvc-deserialize-byte-array-from-json-uint8array
                 const str = String.fromCharCode.apply(null, new Uint8Array(fileReader.result));
-                SendMessage(receiverObject, receiverMethod, window.btoa(str));
+                SendMessage(object, method, window.btoa(str));
 
                 input.remove();
             };
