@@ -10,8 +10,6 @@ This repository contains some helpful scripts and  skeleton implementations of v
 
 I'm just a hobbyist, so if you have any improvements or suggestions, let me know!
 
-***The main feature of this repository (currently) is the [Item System](/schwer-scripts/ItemSystem) — continue reading from there for a setup guide.***
-
 ## Contents
 - [Common scripts](/schwer-scripts/Common)
     - `BinaryIO` (wrapper for reading and writing binary files)
