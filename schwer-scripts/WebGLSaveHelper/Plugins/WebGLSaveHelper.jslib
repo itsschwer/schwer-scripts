@@ -10,13 +10,26 @@ mergeInto(LibraryManager.library, {
         dl.remove();
     },
 
-    ImportEnabled: function (enabled) {
-        var e = document.getElementById('import');
-        if (enabled) {
-            e.classList.add("enabled");
+    Import: function (extension, receiverObject, receiverMethod) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = Pointer_stringify(extension);
+
+        input.oninput = function (e) {
+            const files = e.target.files;
+            if (files.length === 0) return;
+
+            const fileReader = new FileReader();
+            fileReader.readAsArrayBuffer(files[0]);
+            fileReader.onload = function () {
+                // Reference: https://stackoverflow.com/questions/17845032/net-mvc-deserialize-byte-array-from-json-uint8array
+                const str = String.fromCharCode.apply(null, new Uint8Array(fileReader.result));
+                SendMessage(receiverObject, receiverMethod, window.btoa(str));
+
+                input.remove();
+            };
         }
-        else {
-            e.classList.remove("enabled");
-        }
-    }
+
+        input.click();
+    },
 });

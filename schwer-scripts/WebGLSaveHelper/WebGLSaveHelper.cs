@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Schwer.WebGL {
     public static class WebGLHelperSaveHelper {
         [DllImport("__Internal")] private static extern void Export(string base64, string fileName);
-        [DllImport("__Internal")] public static extern void ImportEnabled(bool enabled);
+        [DllImport("__Internal")] private static extern void Import(string extension, string receiverObject, string receiverMethod);
 
         // References:
         // https://stackoverflow.com/questions/17845032/net-mvc-deserialize-byte-array-from-json-uint8array
@@ -28,6 +28,10 @@ namespace Schwer.WebGL {
         // Reference: https://forum.unity.com/threads/access-specific-files-in-idbfs.452168/
         public static void Download(string filePath, string fileName) {
             Export(Convert.ToBase64String(File.ReadAllBytes(filePath)), fileName);
+        }
+
+        public static void Import(string extension, GameObject receiverObject, Action<string> receiverMethod) {
+            Import(extension, receiverObject.name, receiverMethod.ToString());
         }
     }
 }
