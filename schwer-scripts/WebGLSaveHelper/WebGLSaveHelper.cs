@@ -12,17 +12,17 @@ namespace Schwer.WebGL {
         // References:
         // https://stackoverflow.com/questions/17845032/net-mvc-deserialize-byte-array-from-json-uint8array
         // https://stackoverflow.com/questions/4736155/how-do-i-convert-struct-system-byte-byte-to-a-system-io-stream-object-in-c
-        public static SaveData SaveDataFromBase64String(string base64) {
+        public static T FromBase64String<T>(string base64) where T : class {
             var formatter = new BinaryFormatter();
             using (var stream = new MemoryStream(Convert.FromBase64String(base64))) {
                 try {
-                    return formatter.Deserialize(stream) as SaveData;
+                    return formatter.Deserialize(stream) as T;
                 }
                 catch (System.Runtime.Serialization.SerializationException e) {
                     Debug.LogWarning(e);
+                    return null;
                 }
             }
-            return null;
         }
 
         // Reference: https://forum.unity.com/threads/access-specific-files-in-idbfs.452168/
