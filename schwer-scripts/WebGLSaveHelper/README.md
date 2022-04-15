@@ -4,8 +4,8 @@
 Helper files for importing and exporting data to and from WebGL builds.
 
 ## Contents
-* `WebGLSaveHelper.jslib` (handles downloading and selecting files)
-* `WebGLSaveHelper.cs` (wrapper for calling JavaScript functions)
+- `WebGLSaveHelper.jslib` (handles downloading and selecting files)
+- `WebGLSaveHelper.cs` (wrapper for calling JavaScript functions)
 
 ## Example usage
 ```cs
