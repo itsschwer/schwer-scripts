@@ -17,7 +17,11 @@ mergeInto(LibraryManager.library, {
 
         input.oninput = function (e) {
             const files = e.target.files;
-            if (files.length === 0) return;
+
+            if (files.length === 0) {
+                input.remove();
+                return;
+            }
 
             const fileReader = new FileReader();
             fileReader.readAsArrayBuffer(files[0]);
