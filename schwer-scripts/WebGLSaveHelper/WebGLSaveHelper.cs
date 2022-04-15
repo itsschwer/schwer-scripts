@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace Schwer.WebGL {
-    public static class WebGLHelperSaveHelper {
+    public static class WebGLSaveHelper {
         [DllImport("__Internal")] private static extern void Export(string base64, string fileName);
         [DllImport("__Internal")] private static extern void Import(string extension, string receiverObject, string receiverMethod);
 
