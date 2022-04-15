@@ -1,10 +1,4 @@
 mergeInto(LibraryManager.library, {
-    // SyncFiles : function() {
-    //     FS.syncfs(false, function(err) {
-    //         // handle callback
-    //     });
-    // },
-
     SetDownload: function (base64, fileName) {
         // Reference: https://stackoverflow.com/questions/34339593/open-base64-in-new-tab
         var url = 'data:application/octet-stream;base64,' + Pointer_stringify(base64);

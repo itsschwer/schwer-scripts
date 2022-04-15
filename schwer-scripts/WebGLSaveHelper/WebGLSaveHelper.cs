@@ -6,12 +6,6 @@ using UnityEngine;
 
 namespace Schwer.WebGL {
     public static class WebGLHelperSaveHelper {
-        // Reference: https://answers.unity.com/questions/1095407/saving-webgl.html
-        // [DllImport("__Internal")] private static extern void SyncFiles();
-        // ^ Needs to be called in order to save persistent data to browser's IndexedDB
-        // Unsatisfactory on itch.io, since each upload will have a different path
-        // Does not work by default with Chrome -incognito, haven't tested with other browsers
-
         [DllImport("__Internal")] private static extern void SetDownload(string base64, string fileName);
         [DllImport("__Internal")] public static extern void ImportEnabled(bool enabled);
 
