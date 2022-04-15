@@ -78,7 +78,6 @@
     <!-- unityContainer, etc -->
     <div id="footer">
         <a onclick="unityInstance.SetFullscreen(1)" class="enabled">Fullscreen</a>
-        <a id="download">Download save file (--:--)</a>
         <a id="import" onclick="inputPrompt(this)">Import local save file</a>
         <form>
             <input id="input" type="file" accept=".%UNITY_CUSTOM_SAVE_FILE_EXTENSION%" oninput="readFile(this.files)" style="display:none;">

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Schwer.WebGL {
     public static class WebGLHelperSaveHelper {
-        [DllImport("__Internal")] private static extern void SetDownload(string base64, string fileName);
+        [DllImport("__Internal")] private static extern void Export(string base64, string fileName);
         [DllImport("__Internal")] public static extern void ImportEnabled(bool enabled);
 
         // References:
@@ -26,9 +26,8 @@ namespace Schwer.WebGL {
         }
 
         // Reference: https://forum.unity.com/threads/access-specific-files-in-idbfs.452168/
-        public static void PushToDownload(string filePath, string fileName) {
-            var bytes = File.ReadAllBytes(filePath);
-            SetDownload(Convert.ToBase64String(bytes), fileName);
+        public static void Download(string filePath, string fileName) {
+            Export(Convert.ToBase64String(File.ReadAllBytes(filePath)), fileName);
         }
     }
 }
