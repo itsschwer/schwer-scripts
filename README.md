@@ -22,7 +22,7 @@ I'm just a hobbyist, so if you have any improvements or suggestions, let me know
     - `ScriptableObjectUtility` (work with Scriptable Object assets via code)
 - [Item System](/schwer-scripts/ItemSystem) (serializable!)
 - [Scriptable Database](/schwer-scripts/ScriptableDatabase)
-- TBA (WebGL save/loading!)
+- [WebGL Data Importing/Exporting](/schwer-scripts/WebGLSaveHelper)
 
 ## Updating
 There currently isn't an automatic process to update a copy of **schwer-scripts** that has been imported into a Unity project, but here are the steps I've been taking to update manually:
