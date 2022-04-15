@@ -3,6 +3,8 @@
 
 Helper files for importing and exporting data to and from WebGL builds.
 
+***Note**: `Pointer_stringify` (in `.jslib`) should be replaced with `UTF8ToString` from Unity 2021.2 onwards!*
+
 ## Contents
 - `WebGLSaveHelper.jslib` (handles downloading and selecting files)
 - `WebGLSaveHelper.cs` (wrapper for calling JavaScript functions)
@@ -11,8 +13,8 @@ Helper files for importing and exporting data to and from WebGL builds.
 ```cs
 public class SaveManager : MonoBehaviourSingleton<SaveManager> {
     private static string filePath => $"{Application.persistentDataPath}/{fileName}{extension}";
-    private static string fileName => "save";
-    private static string fileExtension => ".dat";
+    private const string fileName = "save";
+    private const string fileExtension = ".dat";
 
     // `SaveData` would be a class marked with the `System.Serializable` attribute.
     public SaveData saveData;
