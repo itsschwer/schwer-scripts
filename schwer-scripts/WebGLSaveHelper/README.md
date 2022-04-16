@@ -24,7 +24,7 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager> {
 
         // Automatically download new saves when they are made
         if (Application.platform == RuntimePlatform.WebGLPlayer) {
-            WebGLSaveHelper.Download(filePath, fileName + fileExtension);
+            WebGLSaveHelper.Download(File.ReadAllBytes(filePath), fileName + fileExtension);
         }
     }
 
