@@ -26,8 +26,8 @@ namespace Schwer.WebGL {
         }
 
         // Reference: https://forum.unity.com/threads/access-specific-files-in-idbfs.452168/
-        public static void Download(string filePath, string fileName) {
-            Export(Convert.ToBase64String(File.ReadAllBytes(filePath)), fileName);
+        public static void Download(byte[] data, string fileName) {
+            Export(Convert.ToBase64String(data), fileName);
         }
 
         public static void Import(string extension, GameObject receiverObject, Action<string> receiverMethod) {
