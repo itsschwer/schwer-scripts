@@ -1,9 +1,10 @@
 # schwer-scripts
-[![Source](https://img.shields.io/badge/Source-schwer--scripts-0366D6.svg)](https://github.com/itsschwer/schwer-scripts) [![Showcase](https://img.shields.io/badge/Demo-Showcase-0366D6.svg)](https://github.com/itsschwer/Showcase) [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://www.paypal.com/donate?hosted_button_id=NYFKAS24D4MJS)
+[![Source on GitHub](https://img.shields.io/badge/Source-0D1117?logo=github)](https://github.com/itsschwer/schwer-scripts)
+[![Donate with PayPal](https://img.shields.io/badge/Donate-FFD140?logo=paypal)](https://www.paypal.com/donate?hosted_button_id=NYFKAS24D4MJS)
 
 Open-source code for Unity.
 
-A demonstration of how this repository could be used, including a playable demo, is available from the [Showcase](https://github.com/itsschwer/Showcase) repository.
+A demonstration of how this repository could be used, including a playable demo, is available from the [**Showcase**](https://github.com/itsschwer/Showcase) repository.
 
 ## About
 This repository contains some helpful scripts and  skeleton implementations of various features. Feel free to use this as a reference or a base for your own project(s).
