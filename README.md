@@ -4,7 +4,7 @@
 
 Open-source code for Unity.
 
-A demonstration of how this repository could be used, including a playable demo, is available from at [**schwer-scripts-demo**](https://github.com/itsschwer/schwer-scripts-demo).
+A demonstration of how this repository could be used, including a playable demo, is available at [**schwer-scripts-demo**](https://github.com/itsschwer/schwer-scripts-demo).
 
 ## About
 This repository contains some helpful scripts and  skeleton implementations of various features. Feel free to use this as a reference or a base for your own project(s).
